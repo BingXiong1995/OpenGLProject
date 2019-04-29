@@ -34,7 +34,7 @@ To control the camera, need to enable material shader first, because the code of
 •	T – move up
 •	Mouse input
 
-![image](https://github.com/BingXiong1995/OpenGLProject/blob/master/Images/2.png?raw=true)
+![image](https://github.com/BingXiong1995/OpenGLProject/blob/master/Images/3.png?raw=true)
 
 ### Material
 •	Z - add material and one light
