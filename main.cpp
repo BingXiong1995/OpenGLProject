@@ -23,12 +23,12 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void drop_callback(GLFWwindow* window, int count, const char** paths);
 void mouse_callback(GLFWwindow* window, double xpos, double ypos);
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
-void mouse_button_callback(GLFWwindow* window, int button, int action, int mods); // ÏìÓ¦Êó±êµã»÷ÊÂ¼ş
-void handleLightType(Shader &multipleLightingShader, Shader &mutipleLightLampShader, int lightType); // ¸Ä±ä¹âµÄÀàĞÍ
-void dynamicRenderLights(int number, Shader lightingShader); // ¶¯Ì¬äÖÈ¾¹âÔ´
-void renderMaterial(int materialIndex, Shader lightingShader, Shader lampShader, int materialActive, unsigned int lightVAO); // ¶¯Ì¬¸Ä±ä²ÄÖÊ
-void loadModelFromFile(string filePath, vector<float> &VectorofVertice, vector<unsigned int> &VectorofFace); // ´ÓÎÄ¼ş¼ÓÔØÄ£ĞÍ
-void renderModel(vector<float> VectorofVertice, vector<unsigned int> VectorofFace, unsigned &modelVBO, unsigned &modelVAO, unsigned &modelEBO); // ÉèÖÃÄ£ĞÍµÄVAO¡¢VBO¡¢EBO
+void mouse_button_callback(GLFWwindow* window, int button, int action, int mods); // å“åº”é¼ æ ‡ç‚¹å‡»äº‹ä»¶
+void handleLightType(Shader &multipleLightingShader, Shader &mutipleLightLampShader, int lightType); // æ”¹å˜å…‰çš„ç±»å‹
+void dynamicRenderLights(int number, Shader lightingShader); // åŠ¨æ€æ¸²æŸ“å…‰æº
+void renderMaterial(int materialIndex, Shader lightingShader, Shader lampShader, int materialActive, unsigned int lightVAO); // åŠ¨æ€æ”¹å˜æè´¨
+void loadModelFromFile(string filePath, vector<float> &VectorofVertice, vector<unsigned int> &VectorofFace); // ä»æ–‡ä»¶åŠ è½½æ¨¡å‹
+void renderModel(vector<float> VectorofVertice, vector<unsigned int> VectorofFace, unsigned &modelVBO, unsigned &modelVAO, unsigned &modelEBO); // è®¾ç½®æ¨¡å‹çš„VAOã€VBOã€EBO
 void processInput(GLFWwindow *window);
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
 unsigned int loadTexture(const char *path);
@@ -37,7 +37,7 @@ unsigned int loadTexture(const char *path);
 // settings
 const unsigned int SCR_WIDTH = 1200;
 const unsigned int SCR_HEIGHT = 800;
-//string filePath = "C:\\Users\\xiong\\source\\repos\\Project6\\Project6\\bunny.poly"; // ²âÊÔÊ¹ÓÃ
+//string filePath = "C:\\Users\\xiong\\source\\repos\\Project6\\Project6\\bunny.poly"; // æµ‹è¯•ä½¿ç”¨
 string filePath = "";
 unsigned int numOfLights = 5;
 unsigned int materialIndex = 1;
@@ -80,17 +80,17 @@ int main()
 
 	// glfw window creation
 	// --------------------
-	GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "Bing & JiaYan Project", NULL, NULL);
+	GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "BingXiong Project", NULL, NULL);
 	if (window == NULL)
 	{
 		std::cout << "Failed to create GLFW window" << std::endl;
 		glfwTerminate();
 		return -1;
 	}
-	// glfwµÄcallbackÈ«²¿·ÅÔÚÕâÀï
+	// glfwçš„callbackå…¨éƒ¨æ”¾åœ¨è¿™é‡Œ
 	glfwMakeContextCurrent(window);
 	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
-	glfwSetCursorPosCallback(window, mouse_callback); //×îºóÔÙ´ò¿ª
+	glfwSetCursorPosCallback(window, mouse_callback); //æœ€åå†æ‰“å¼€
 	glfwSetKeyCallback(window, key_callback);
 	glfwSetDropCallback(window, drop_callback);
 	glfwSetScrollCallback(window, scroll_callback);
@@ -114,16 +114,16 @@ int main()
 
 	// build and compile our shader zprogram
 	// ------------------------------------
-	// ¶à¹âÔ´µÄshader
+	// å¤šå…‰æºçš„shader
 	Shader multipleLightingShader("multiplelightsvs.txt", "multiplelightsfs.txt");
 	Shader mutipleLightLampShader("multiplelightslampvs.txt", "multiplelightslampfs.txt");
-	// ²ÄÖÊµÄshader
+	// æè´¨çš„shader
 	Shader lightingShader("materialsvs.txt", "materialsfs.txt");
 	Shader lampShader("materialslampvs.txt", "materialslampfs.txt");
-	// »ù´¡¹âÕÕµÄshader
+	// åŸºç¡€å…‰ç…§çš„shader
 	Shader basicLightingShader("basiclightingvs.txt", "basiclightingfs.txt");
 	Shader basicLampShader("basiclightinglampvs.txt", "basiclightinglampfs.txt");
-	// transformationµÄshader
+	// transformationçš„shader
 	Shader transShader("transformvs.txt", "transformfs.txt");
 
 	// set up vertex data (and buffer(s)) and configure vertex attributes
@@ -172,7 +172,7 @@ int main()
 		-0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,  0.0f,  0.0f,
 		-0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,  0.0f,  1.0f
 	};
-	// Èç¹ûÃ»ÓĞÄ¬ÈÏµÄÄ£ĞÍ¾ÍÍ¨¹ıÍÏ×§ÎÄ¼şÀ´¼ÓÔØ
+	// å¦‚æœæ²¡æœ‰é»˜è®¤çš„æ¨¡å‹å°±é€šè¿‡æ‹–æ‹½æ–‡ä»¶æ¥åŠ è½½
 	if (filePath != "") {
 		loadModelFromFile(filePath, VectorofVertice, VectorofFace);
 		renderModel(VectorofVertice, VectorofFace, modelVBO, modelVAO, modelEBO);
@@ -250,12 +250,12 @@ int main()
 		glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		// ¶¯Ì¬¹âÔ´
+		// åŠ¨æ€å…‰æº
 		lightPos.x = 1.0f + sin(glfwGetTime()) * 2.0f;
 		lightPos.y = sin(glfwGetTime() / 2.0f) * 1.0f;
 		lightPos.z = sin(glfwGetTime() / 3.0f) * 0.5f;
 
-		renderMaterial(materialIndex, lightingShader, lampShader, materialActive, lightVAO); // äÖÈ¾²ÄÖÊ
+		renderMaterial(materialIndex, lightingShader, lampShader, materialActive, lightVAO); // æ¸²æŸ“æè´¨
 
 		// view/projection transformations
 		glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
@@ -274,7 +274,7 @@ int main()
 			glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(transform));
 		}
 
-		// °ÑÄ£ĞÍäÖÈ¾³öÀ´	
+		// æŠŠæ¨¡å‹æ¸²æŸ“å‡ºæ¥	
 		glBindVertexArray(modelVAO);
 		glDrawElements(GL_TRIANGLES, int(VectorofFace.size()), GL_UNSIGNED_INT, 0);
 
@@ -292,8 +292,8 @@ int main()
 			glDrawArrays(GL_TRIANGLES, 0, 36);
 		}
 	
-		// ¶à¹âÔ´äÖÈ¾
-		// ×¢ÒâÕâÀïÖ»ÊÇÏÔÊ¾³öÀ´²¢²»´ú±íÕæÕıµÄ¹âÔ´
+		// å¤šå…‰æºæ¸²æŸ“
+		// æ³¨æ„è¿™é‡Œåªæ˜¯æ˜¾ç¤ºå‡ºæ¥å¹¶ä¸ä»£è¡¨çœŸæ­£çš„å…‰æº
 		if (lightType == 1) {
 			mutipleLightLampShader.use();
 			mutipleLightLampShader.setMat4("projection", projection);
@@ -545,7 +545,7 @@ void handleLightType(Shader &multipleLightingShader, Shader &mutipleLightLampSha
 	}
 }
 
-// äÖÈ¾²ÄÖÊ
+// æ¸²æŸ“æè´¨
 void renderMaterial(int materialIndex, Shader lightingShader, Shader lampShader, int materialActive, unsigned int lightVAO) {
 	if (materialActive == 1) {
 		lightingShader.use();
@@ -598,7 +598,7 @@ void renderMaterial(int materialIndex, Shader lightingShader, Shader lampShader,
 	}
 }
 
-// ÍÏ×§¼ÓÔØÎÄ¼ş
+// æ‹–æ‹½åŠ è½½æ–‡ä»¶
 void drop_callback(GLFWwindow* window, int count, const char** paths)
 {
 	int i;
@@ -606,7 +606,7 @@ void drop_callback(GLFWwindow* window, int count, const char** paths)
 		cout << paths[i] << endl;
 		filePath = paths[i];
 		cout << "new file loaded from Path" << filePath << endl;
-		// Çå³ıÖ®Ç°µÄÏòÁ¿
+		// æ¸…é™¤ä¹‹å‰çš„å‘é‡
 		VectorofVertice.clear();
 		VectorofFace.clear();
 		loadModelFromFile(filePath, VectorofVertice, VectorofFace);
@@ -614,7 +614,7 @@ void drop_callback(GLFWwindow* window, int count, const char** paths)
 	}
 }
 
-// Êó±êµã»÷ÊÂ¼ş
+// é¼ æ ‡ç‚¹å‡»äº‹ä»¶
 void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
 {
 	if (button == GLFW_MOUSE_BUTTON_RIGHT && action == GLFW_PRESS) {
@@ -640,7 +640,7 @@ void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
 	std::cout << "numOfLights" << numOfLights << std::endl;
 }
 
-// ¶¯Ì¬äÖÈ¾µã¹âÔ´
+// åŠ¨æ€æ¸²æŸ“ç‚¹å…‰æº
 void dynamicRenderLights(int number, Shader lightingShader)
 {
 	if (number == 1) {
@@ -845,7 +845,7 @@ void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
 	camera.ProcessMouseScroll(yoffset);
 }
 
-// ¼ÓÔØ2DµÄ²ÄÖÊ£¬ÊÇÒ»¸öPNGµÄÍ¼Æ¬
+// åŠ è½½2Dçš„æè´¨ï¼Œæ˜¯ä¸€ä¸ªPNGçš„å›¾ç‰‡
 unsigned int loadTexture(char const * path)
 {
 	unsigned int textureID;
@@ -883,7 +883,7 @@ unsigned int loadTexture(char const * path)
 	return textureID;
 }
 
-// ´ÓÎÄ¼ş¼ÓÔØÄ£ĞÍ
+// ä»æ–‡ä»¶åŠ è½½æ¨¡å‹
 void loadModelFromFile(string filePath, vector<float> &VectorofVertice, vector<unsigned int> &VectorofFace) {
 	ifstream inFile;
 	inFile.open(filePath, ios::in);
@@ -915,10 +915,10 @@ void loadModelFromFile(string filePath, vector<float> &VectorofVertice, vector<u
 
 
 	//dynamic array
-	vertices = new float[NumofVertices * 6];  // 3 dimensions ¶¥µãÎ»ÖÃÊı¾İ
-	faces = new  unsigned int[NumofFaces * 3];  // 3 vertices each triangle Ã¿¸ö±íÃæµÄÊı¾İ
+	vertices = new float[NumofVertices * 6];  // 3 dimensions é¡¶ç‚¹ä½ç½®æ•°æ®
+	faces = new  unsigned int[NumofFaces * 3];  // 3 vertices each triangle æ¯ä¸ªè¡¨é¢çš„æ•°æ®
 
-	// ¶¥µãÊı¾İ
+	// é¡¶ç‚¹æ•°æ®
 	for (int i = 0; i < NumofVertices; i++)
 	{
 		inFile >> type >> x >> y >> z >> nx >> ny >> nz;
@@ -938,7 +938,7 @@ void loadModelFromFile(string filePath, vector<float> &VectorofVertice, vector<u
 		VectorofVertice.push_back(nz);
 	}
 
-	// ±íÃæÊı¾İ
+	// è¡¨é¢æ•°æ®
 	for (int j = 0; j < NumofFaces; j++)
 	{
 		inFile >> type >> f1 >> f2 >> f3;
@@ -959,7 +959,7 @@ void renderModel(vector<float> VectorofVertice, vector<unsigned int> VectorofFac
 	glGenVertexArrays(1, &modelVAO);
 	glGenBuffers(1, &modelVBO);
 	glGenBuffers(1, &modelEBO);
-	// Ê×ÏÈ°ó¶¨¶¥µãÊı¾İ ÔÚ°ó¶¨¶¥µãbuffer ÔÙÅäÖÃ¶¥µã
+	// é¦–å…ˆç»‘å®šé¡¶ç‚¹æ•°æ® åœ¨ç»‘å®šé¡¶ç‚¹buffer å†é…ç½®é¡¶ç‚¹
 	glBindVertexArray(modelVAO);
 	glBindBuffer(GL_ARRAY_BUFFER, modelVBO);
 	glBufferData(GL_ARRAY_BUFFER, int(VectorofVertice.size()) * sizeof(float), &VectorofVertice[0], GL_STATIC_DRAW);
