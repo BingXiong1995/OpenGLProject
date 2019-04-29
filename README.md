@@ -13,6 +13,8 @@ Features:
 Import Model
 To import a model into this application is very easy. Users just need to drag a file to this window and a model will be displayed in this window.
 
+![image](https://github.com/BingXiong1995/OpenGLProject/blob/master/Images/1.png?raw=true)
+
 
 
 
