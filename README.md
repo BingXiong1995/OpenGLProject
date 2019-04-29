@@ -1,6 +1,7 @@
 # OpenGLProject
 
 This is an Computer graphic class project using glad, glfw, glm
+Demo https://www.youtube.com/watch?v=ZYtrCOHmLak&feature=youtu.be
 
 Make sure your have configured glad and glfw to run these code.
 
