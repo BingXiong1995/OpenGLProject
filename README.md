@@ -26,32 +26,32 @@ To import a model into this application is very easy. Users just need to drag a 
 
 ### Camera
 To control the camera, need to enable material shader first, because the code of control camera is in material shader, press Z to enable material shade.
-•	W – move forward
-•	S – move backward
-•	A – move left  
-•	D – move right  
-•	E – move down 
-•	T – move up
-•	Mouse input
+- W – move forward
+- S – move backward
+- A – move left  
+- D – move right  
+- E – move down 
+- T – move up
+- Mouse input
 
 ![image](https://github.com/BingXiong1995/OpenGLProject/blob/master/Images/3.png?raw=true)
 
 ### Material
-•	Z - add material and one light
-•	M - Bronze material
-•	P - White plastic material
-•	C - Ruby Material
-•	O - Dynamic Material
+- Z - add material and one light
+- M - Bronze material
+- P - White plastic material
+- C - Ruby Material
+- O - Dynamic Material
 
 ![image](https://github.com/BingXiong1995/OpenGLProject/blob/master/Images/4.png?raw=true)
 
 ![image](https://github.com/BingXiong1995/OpenGLProject/blob/master/Images/5.png?raw=true)
 
 ### Lighting
-•	V - Disable all the shaders
-•	X – Enable Multiple lights, direction lights and points light
-•	Press mouse left button or right button to increase or decrease the number of points lights.
-•	Z – Enable Dynamic point light (need to press V to disable lighting shader)
-•	R – show rotate light.
+-	V - Disable all the shaders
+-	X – Enable Multiple lights, direction lights and points light
+-	Press mouse left button or right button to increase or decrease the number of points lights.
+-	Z – Enable Dynamic point light (need to press V to disable lighting shader)
+-	R – show rotate light.
 ![image](https://github.com/BingXiong1995/OpenGLProject/blob/master/Images/7.png?raw=true)
 ![image](https://github.com/BingXiong1995/OpenGLProject/blob/master/Images/6.png?raw=true)
