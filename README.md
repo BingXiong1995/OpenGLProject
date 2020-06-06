@@ -1,4 +1,4 @@
-# OpenGLProject
+# OpenGL Render Engine
 
 This is an Computer graphic class project using glad, glfw, glm
 
